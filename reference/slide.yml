@@ -1,0 +1,79 @@
+# Slide frontmatter reference for Allmaps Slides (2026-10-01).
+# Copy selected fields between --- lines at the top of a Markdown slide.
+# This file is not a slide and is not loaded automatically.
+# title is required (EXAMPLE below); all other fields are optional.
+# Commented EXAMPLES have no fixed default. Do not enable them all.
+# Environment placeholders are NOT expanded in Markdown frontmatter.
+
+title: My slide
+# description: "" # Default: unset; used in chapter metadata.
+
+location: {}
+# center: omitted => fit warped maps, otherwise keep previous center.
+# zoom: omitted => fit warped maps, otherwise keep previous zoom.
+# bearing: omitted => use a map marked useBearing, otherwise 0 when fitting maps,
+# or keep the previous bearing when there are no maps.
+# Initial camera before map fitting: center [0, 0], zoom 14, bearing 0.
+# EXAMPLE (replace location):
+# location:
+#   center: [4.897004, 52.3691733] # [longitude, latitude]
+#   zoom: 15
+#   bearing: 0 # Clockwise degrees.
+#   duration: 4000 # Default flight duration in milliseconds; the initial view
+#   # and image slides are immediate. The app currently treats 0 as the default.
+
+hideBasemap: false # Also hidden automatically for any type: Image entry.
+map: {} # Inherits project/slideshow map settings.
+# Accepts every field in slides.config.yml's map block: theme, styles,
+# labels.visible/position, hiddenLayers, foreground.light/dark and protomaps.
+# Defaults depend on the parent scopes; copy only fields you want to override.
+
+warpedMaps: [] # No maps. A single object is also accepted instead of an array.
+# EXAMPLE (replace []):
+#   - url: https://annotations.allmaps.org/maps/e9aa6ec10276bf65@d2d0044d129ea2d5
+#     # url OR path is required; url wins if both are supplied.
+#     # path: assets/annotations/map.json # Local alternative, content-root relative.
+#     # type: Image # Default: annotation. Image treats url as an IIIF Image API
+#     # service base URL without /info.json, rather than a georeference annotation.
+#     # caption: My map # Default: label derived from homepage/url, then Map layer N.
+#     # provenance: Collection name # Default: host from homepage/url, then
+#     # "Image layer" or "Georeference annotation".
+#     # homepage: https://example.org/object # Default: unset; original source link.
+#     useBearing: false # Take orientation from this map's first annotation.
+#     useBounds: false # If any maps opt in, only those determine automatic bounds;
+#     # otherwise all maps do. Explicit location values override automatic fitting.
+#     useZoom: false # Derive zoom from resource scale; explicit zoom takes priority.
+#     options: {} # App + renderer defaults: see warped-map-options.yml.
+#     darkOptions: {} # Merged over options only in dark interface mode.
+#     # region: [0, 0, 12055, 7632] # EXAMPLE: Image-only crop in original pixels
+#     # [x, y, width, height]; omitted means the whole image.
+#     wiggle: false # Image-only slight rotation of 2.5 degrees.
+# Each slide supplies its own map list; maps do not carry over automatically.
+
+layers: [] # No changes to the slideshow's shared GeoJSON layers.
+# EXAMPLE: {source-id}-fill | -line | -point-circle | -point-symbol.
+#   - layer: route-line # Required existing layer id, without the user- prefix.
+#     opacity: 1 # EXAMPLE, 0..1; omitted leaves the current opacity unchanged.
+#     visibility: visible # EXAMPLE: visible | none; omitted preserves visibility.
+#     duration: 300 # EXAMPLE, milliseconds; omitted uses the current MapLibre
+#     # paint transition. These changes persist until a later slide changes them.
+
+subslideshows: [] # No linked slideshows; a single id/object is also accepted.
+# EXAMPLES (must match an id in slides.config.yml):
+#   - history
+#   - id: details
+#     title: Read more # Optional label, defaults to that slideshow's title.
+
+# sprite: # Default: unset. Advanced prebuilt image sprites; all fields required.
+#   json: https://example.org/sprites.json
+#   image: https://example.org/sprites.jpg
+#   dimensions: [4096, 4096] # EXAMPLE [width, height] in pixels.
+# Sprite chapters cannot generate thumbnails in the current renderer.
+
+# Legacy fields still accepted by the schema, currently unused by the app.
+# Kept here for completeness; leave them omitted in new slides.
+# caption: "" # No visible chapter caption; write captions in Markdown or maps.
+# freeze: false # Does not currently freeze the camera.
+# padding: 25 # App uses layout-dependent padding, with 25px base padding.
+# fit: contain # cover | contain | equal; current camera fits map bounds.
+# contain: false # No current effect.

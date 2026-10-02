@@ -1,0 +1,13 @@
+node_modules/
+.pnpm-store/
+.slides/
+.svelte-kit/
+dist/
+build/
+static/iiif/
+.env
+.env.*
+!.env.example
+.DS_Store
+
+.container-cache/

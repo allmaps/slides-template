@@ -1,0 +1,120 @@
+# English interface defaults for Allmaps Slides (2026-10-01).
+# Copy the desired keys under interface.text in slides.config.yml.
+# This reference is not loaded automatically. Keep all {placeholders}.
+# Some labels are retained for compatibility or alternate app views.
+
+interface:
+  text:
+    noContent: No slideshow content yet
+    noContentDescription: There are no slides to display. Generated images are available in the IIIF overview.
+    noContentWithoutIiif: There are no slides to display. Add Markdown slides to a slideshow folder to get started.
+    iiifOverview: IIIF images
+    thumbnailsOverview: Thumbnails
+    iiifDescription: Browse generated image services, manifests and collections.
+    thumbnailsDescription: Preview images by slideshow and slide. Sharing images are used in Open Graph and Twitter meta tags.
+    generationDisabled: "{name} generation is disabled."
+    noGeneratedImages: No generated images yet.
+    generateIiifHint: Run slides iiif or slides build with your content directory to generate the images.
+    generateThumbnailsHint: Run slides thumbnails or slides build with your content directory to generate previews.
+    iiifCollection: IIIF Collection
+    iiifManifests: Manifests
+    iiifManifest: IIIF Manifest
+    iiifService: Image service (info.json)
+    copyUrl: Copy URL
+    copiedUrl: URL copied
+    copyUrlManually: "Copy this URL manually:"
+    resourceUrl: Resource URL
+    allmapsEditor: Allmaps Editor
+    theseusViewer: Theseus Viewer
+    imageCountSingular: "{count} image"
+    imageCountPlural: "{count} images"
+    imageDimensions: "{width} × {height} pixels"
+    generatedFileCount: "{count} generated files"
+    thumbnailLight: Slide preview · light
+    thumbnailDark: Slide preview · dark
+    thumbnailLayerLight: Map {count} · light
+    thumbnailLayerDark: Map {count} · dark
+    thumbnailSocial: Sharing image · Open Graph / Twitter
+    thumbnailStart: Start screen
+    thumbnailsForTitle: Thumbnails for {title}
+    startButton: Start
+    open: Open
+    close: Close
+    expand: Expand
+    collapse: Collapse
+    show: Show
+    hide: Hide
+    sections: Sections
+    chapterNumber: Chapter {number}
+    chapterCountSingular: "{count} chapter in this slideshow"
+    chapterCountPlural: "{count} chapters in this slideshow"
+    madeWith: Made with
+    productName: Allmaps Slides
+    softwareSource: Source code
+    softwareReleaseNotes: Release notes
+    softwareLicenses: Software licenses
+    softwareDevelopmentBuild: Development build
+    softwareModifiedBuild: Modified build
+    softwareCustomApp: Custom application
+    navigation: Slideshow navigation
+    options: Slideshow options
+    previousChapter: Previous chapter
+    previousChapterTitle: "Previous chapter: {title}"
+    nextChapter: Next chapter
+    nextChapterTitle: "Next chapter: {title}"
+    chapterPosition: Chapter {current} of {total}
+    chapterCounter: "{current} / {total}"
+    slideshowProgress: Slideshow progress
+    mapLayers: Map layers
+    backgroundMap: Background map
+    chapters: Table of contents
+    lightMode: Light mode
+    darkMode: Dark mode
+    hideSidePanel: Hide side panel
+    showSidePanel: Show side panel
+    backToMain: Back to main slideshow
+    backToTitle: Back to {title}
+    scrollToTop: Back to top
+    credits: Credits
+    noCredits: No credits have been provided for this slideshow.
+    expandAll: Expand all
+    collapseAll: Collapse all
+    slides: Slides
+    subslideshows: Subslideshows
+    slideCountSingular: "{count} slide"
+    slideCountPlural: "{count} slides"
+    slideCard: "{title}, slide {current} of {total}"
+    slideshowCard: "{title}, {count}"
+    mapCount: Show map layers ({count})
+    mapCountSingular: "{count} map"
+    mapCountPlural: "{count} maps"
+    mapLayer: Map layer {count}
+    imageLayer: Image layer
+    georeferenceAnnotation: Georeference annotation
+    noLayers: No map layers for this slide
+    visibleLayerSingular: "{count} map layer visible"
+    visibleLayerPlural: "{count} map layers visible"
+    hiddenLayerCount: "{visible}, {count} hidden"
+    openInAllmaps: Open in Allmaps
+    showFullMap: Show full map
+    restoreMapView: Restore slide view
+    noWarpedMaps: This slide does not use any warped maps.
+    showTextPanel: Show text panel
+    reduceTextPanel: Reduce text panel
+    expandTextPanel: Expand text panel
+    panelDragHint: Drag up to expand or down to hide
+    panelDragInstructions: Drag up to expand the text panel or down to hide it. Use the up and down arrow keys to resize.
+    map: Map
+    zoomIn: Zoom in
+    zoomOut: Zoom out
+    resetNorth: Reset north
+    image: Image
+    enlargeImage: "Enlarge image: {title}"
+    imageZoom: Image zoom
+    loadingImage: Loading image…
+    imageLoadError: The image could not be loaded.
+    tryAgain: Try again
+    downloadPreview: Download image preview
+    downloadView: Download image view
+    previewDownloadError: The image preview could not be downloaded.
+    viewDownloadError: The image view could not be downloaded.

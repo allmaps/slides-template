@@ -1,0 +1,145 @@
+# Project configuration reference for Allmaps Slides (2026-10-01).
+# Not loaded automatically. Copy selected settings into ../slides.config.yml.
+# Active values are defaults, not the settings chosen for the Amsterdam example.
+# Commented values marked EXAMPLE have no fixed default; do not enable them all.
+# Paths are relative to the content root, not to this reference directory.
+# ${ENVIRONMENT_VARIABLE} placeholders are expanded in project config only.
+
+title: Slides
+# title also accepts { short: "Short title", long: "Expanded title" }.
+# Each variant falls back to the other. A string supplies both variants.
+# description: "" # Default: unset. Also accepts { short: ..., long: ... }.
+theme: green # green | purple | red | yellow | orange | pink | blue
+# Alternative EXAMPLES (replace theme; do not add a second theme key):
+# theme: { fg: "#64c18f", bg: "#c1e6d2" }
+# theme: { light: green, dark: purple }
+# Each light/dark value can also be a custom { fg, bg } palette.
+# Missing dark falls back to light; missing light falls back to green.
+
+main: main # If omitted with exactly one slideshow, uses that slideshow's id.
+# credits: credits.md # Default: unset; Markdown file, shared across slideshows.
+
+slideshows: []
+# EXAMPLE: replace [] with entries. id and path are required, without defaults.
+#   - id: main
+#     path: slideshows/main
+#     slug: main # Default: id for subslideshows; main always uses the root URL.
+#     title: Slides # Default: overall short title.
+#     description: "" # Default: unset; metadata can fall back to chapter/project.
+#     credits: more-credits.md # Default: unset; appended after shared credits.
+#     map: {} # Inherits project map settings; same fields as map below.
+#     start: {} # Default: omitted, so the first slide supplies the start-screen map.
+#               # An explicit start REPLACES that fallback. Use the map fields
+#               # in slide.yml: location, warpedMaps, map, layers, sprite,
+#               # hideBasemap and the documented legacy fields. No title,
+#               # description or subslideshows here; start is not a chapter.
+# Reserved slideshow slugs: iiif, thumbnails, api, manifest.webmanifest.
+
+site:
+  basePath: "" # For example /my-slideshow; PUBLIC_BASE_PATH takes precedence.
+  publicUrl: "" # Falls back to basePath; PUBLIC_URL takes precedence.
+  # Set an absolute deployment URL for canonical links and sharing metadata.
+
+app: {}
+# app.directory: path/to/custom-app # EXAMPLE; default is the bundled Slides app
+# (or apps/slides when running from the Slides source checkout).
+# app.sourceUrl: https://github.com/example/custom-slides-app/tree/COMMIT
+# EXAMPLE; default: unset. With app.directory, links to matching custom app source
+# from the automatic software credits. Use an HTTP or HTTPS URL.
+
+iiif:
+  enabled: true
+  input: assets/images
+  # output: static/iiif # EXAMPLE; unset means cache only. Setting it also exports
+  # the standalone IIIF CLI batch there. Site builds always include their images.
+  # id: https://example.org/story/iiif # EXAMPLE; default: public URL + /iiif.
+  # collectionLabel: Slides # Default: overall short title.
+  force: false
+  sizes: true
+  tiles: true
+  tileSize: 1024
+  webp: true # Adds WebP output; JPEG is always generated.
+
+thumbnails:
+  enabled: true # SLIDES_THUMBNAILS_ENABLED overrides this.
+
+socialImage:
+  textOverlay: false
+  textSize: 76 # Title pixels at 1200 x 630; > 0 and <= 512.
+  # Default font: the bundled League Spartan font file.
+  # font: # EXAMPLE; family is required when font is supplied.
+  #   family: My Display Font
+  #   path: assets/fonts/display.ttf # Optional TTF/OTF path. If omitted for
+  #   # a custom font, the family must be installed on the rendering machine.
+
+sources: {}
+# EXAMPLE: each source needs type plus path or url (no fixed defaults).
+# sources:
+#   route:
+#     type: geojson
+#     path: assets/geojson/route.geojson
+#     # url: https://example.org/route.geojson # Alternative; path takes priority.
+# GeoJSON becomes fill, line, point-circle and point-symbol layers. Style each
+# feature with SimpleStyle properties; no layer declaration is needed here.
+# Defaults: stroke #64c18f; stroke-opacity 1; stroke-width 8 for lines and 6 for
+# point outlines; fill/marker-color #c1e6d2; fill-opacity 0.6; marker-size medium
+# (radius 8; small 6, large 12). icon-image optionally selects a sprite symbol.
+# Other source types pass additional MapLibre source properties through.
+# Their style layers must be supplied by the application; this is not a global
+# layers declaration. The current GeoJSON loader uses only type and path/url.
+
+map:
+  # theme: light # EXAMPLE; default follows the interface's light/dark mode.
+  # Interface mode follows saved preference, then the system preference.
+  styles: {} # Default: generated Protomaps style for each mode.
+  # Each light/dark entry accepts a URL, local style path or MapLibre style object.
+  # EXAMPLES (replace styles):
+  # styles:
+  #   light: assets/map-styles/light.json
+  #   dark: https://example.org/dark-style.json
+  # Missing modes fall back to an inherited style, then generated Protomaps.
+  labels:
+    visible: false
+    position: belowWarpedMaps # Or aboveWarpedMaps; back/front are aliases.
+  hiddenLayers: [] # Original style layer ids to hide; sets combine across scopes.
+  foreground:
+    light: auto
+    dark: auto
+  # auto follows the style's background color, falling back to #cccccc (light)
+  # and #34373d (dark). A CSS color string can override it.
+  protomaps: {} # Same fields as the top-level protomaps block; inherits them.
+# Basemap precedence: project < slideshow.map < slide.map, per setting.
+# Protomaps precedence: protomaps < map.protomaps < slideshow.map.protomaps
+# < slide.map.protomaps. Custom styles bypass generated Protomaps styling.
+
+protomaps:
+  # key: "" # Unset: use PUBLIC_PROTOMAPS_KEY, then empty string. A configured
+  # key overrides the environment; leave it omitted to use an environment key.
+  locale: en
+  # lang: en # Alias for locale; locale wins when both are supplied.
+  glyphs: https://protomaps.github.io/basemaps-assets/fonts/{fontstack}/{range}.pbf
+  sprites:
+    light: https://protomaps.github.io/basemaps-assets/sprites/v4/light
+    dark: https://protomaps.github.io/basemaps-assets/sprites/v4/dark
+  # sprite: https://example.org/sprites # EXAMPLE; optional single URL, or
+  # { light: URL, dark: URL }. sprite (string or matching mode) takes priority
+  # over sprites.
+  flavors:
+    light: light
+    dark: dark
+  # flavor: light # EXAMPLE; one named flavor or partial flavor object for both
+  # modes. A matching flavors entry takes priority over flavor.
+  # flavors.light/dark also accept partial flavor objects.
+  overrides: {} # Partial flavor properties, or { light: {...}, dark: {...} }.
+  # The full Protomaps style/color override catalog is intentionally omitted.
+
+interface:
+  text: {} # All available keys and English defaults are in interface.yml.
+  # Legacy start-screen keys. Prefer interface.text in new projects and avoid
+  # setting the same label in both places: the Start screen still reads
+  # startButton/madeWith directly from startScreen when present.
+  startScreen:
+    startButton: Start
+    chapterCountSingular: "{count} chapter in this slideshow"
+    chapterCountPlural: "{count} chapters in this slideshow"
+    madeWith: Made with

@@ -1,0 +1,86 @@
+# Per-map rendering options for Allmaps Slides (2026-10-01).
+# Copy selected fields into warpedMaps[].options in slide frontmatter.
+# darkOptions accepts the same fields and overrides options in dark mode only.
+# This file is not loaded automatically. No wrapper key is needed here.
+# Defaults come from Slides and @allmaps/render 1.0.0-beta.84.
+# These are per-map options; renderer/layer constructors and JavaScript callbacks
+# are not content configuration. Protomaps basemap styles are separate.
+
+applyMask: true
+opacity: 1
+saturation: 1 # 0 is grayscale.
+colorize: false
+colorizeColor: "#ff56ba"
+removeColor: false
+removeColorColor: "#222222"
+removeColorThreshold: 0.3
+removeColorHardness: 0.7
+
+# transformationType: polynomial # EXAMPLE. Omitted uses the annotation's
+# transformation (polynomial if none). Image layers use a generated helmert
+# transformation. Other values include helmert, projective and thinPlateSpline.
+# distortionMeasure: log2sigma # EXAMPLE. Omitted disables distortion coloring.
+distortionMeasures: [] # Additional measures to calculate on the triangle mesh.
+distortionColor00: "#fe5e60"
+distortionColor01: "#3b44ad"
+distortionColor1: "#64c18f"
+distortionColor2: "#ffc742"
+distortionColor3: "#fe5e60"
+
+# Overall drawing switches are unset by default; effective value is true.
+# renderMaps: true
+# renderLines: true
+# renderPoints: true
+
+renderGcps: false
+renderGcpsColor: "#63d8e6"
+# renderGcpsSize: 10 # Default point drawing fallback, pixels.
+# renderGcpsBorderSize: 1 # Default point drawing fallback, pixels.
+# renderGcpsBorderColor: "#ffffff" # Default point drawing fallback.
+renderTransformedGcps: false
+renderTransformedGcpsColor: "#ff56ba"
+# renderTransformedGcpsSize: 10
+# renderTransformedGcpsBorderSize: 1
+# renderTransformedGcpsBorderColor: "#ffffff"
+
+renderVectors: false
+renderVectorsColor: "#222222"
+renderVectorsSize: 4
+# renderVectorsBorderSize: 0 # Default line drawing fallback, pixels.
+# renderVectorsBorderColor: "#ffffff"
+renderFullMask: false
+renderFullMaskColor: "#64c18f"
+renderFullMaskSize: 4
+# renderFullMaskBorderSize: 0
+# renderFullMaskBorderColor: "#ffffff"
+renderMask: false
+renderMaskColor: "#ff56ba"
+renderMaskSize: 4
+# renderMaskBorderSize: 0
+# renderMaskBorderColor: "#ffffff"
+renderAppliedMask: false
+renderAppliedMaskColor: "#ff56ba"
+renderAppliedMaskSize: 4
+# renderAppliedMaskBorderSize: 0
+# renderAppliedMaskBorderColor: "#ffffff"
+renderGrid: false
+renderGridColor: "#222222"
+
+anticipateVisibility: false
+overviewTilesSelection: lowest # lowest | highest
+# overviewTilesMaxResolution: 1048576 # Slides live-view default (1024 * 1024).
+# resourceResolution: 100 # EXAMPLE; default is calculated by the renderer.
+# gcps: [...] # Default: annotation control points. Advanced override of
+# resource/geo point pairs; ordinarily edit the annotation instead.
+# resourceMask: [...] # Default: annotation mask, in image pixel coordinates.
+# internalProjection / projection: renderer projection objects (Web Mercator by
+# default), not string CRS names. Do not copy these into ordinary YAML content.
+# visible is controlled by the active slide and map-layer menu; use opacity: 0
+# to author an invisible map. A visible option is overwritten by the app.
+
+debugTriangles: false
+debugTiles: false
+
+# Diagnostic mesh/GCP/line rendering is primarily for the interactive WebGL
+# viewer. The static thumbnail renderer supports a subset of these options;
+# inspect generated previews when using advanced effects.
