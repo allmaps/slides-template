@@ -31,7 +31,7 @@ slideshows: []
 #     start: {} # Default: omitted, so the first slide supplies the start-screen map.
 #               # An explicit start REPLACES that fallback. Use the map fields
 #               # in slide.yml: location, warpedMaps, map, layers, sprite,
-#               # hideBasemap and the documented legacy fields. No title,
+#               # hideBasemap, fit and padding. No title,
 #               # description or subslideshows here; start is not a chapter.
 # Reserved slideshow slugs: iiif, thumbnails, api, manifest.webmanifest.
 
@@ -85,19 +85,42 @@ sources: {}
 # point outlines; fill/marker-color #c1e6d2; fill-opacity 0.6; marker-size medium
 # (radius 8; small 6, large 12). icon-image optionally selects a sprite symbol.
 # Other source types pass additional MapLibre source properties through.
-# Their style layers must be supplied by the application; this is not a global
-# layers declaration. The current GeoJSON loader uses only type and path/url.
+# The GeoJSON loader uses type and path/url. Define its text labels below.
+
+layers: [] # Default: all generated GeoJSON layers visible, with SimpleStyle paint.
+# Reference an existing layer to set global defaults (no user- prefix):
+#   - layer: route-line
+#     visibility: none # visible | none; default: visible.
+#     opacity: 1 # Optional, 0..1; default: the layer's paint/SimpleStyle expression.
+#     duration: 300 # Optional, non-negative milliseconds; default: MapLibre transition.
+# Or define a full MapLibre layer with id, type, source, layout and paint:
+#   - id: building-labels
+#     type: symbol
+#     source: buildings # Must match an entry in sources.
+#     layout:
+#       visibility: none
+#       text-field: [get, Naam] # Read text from each GeoJSON feature's properties.
+#       text-font: [Noto Sans Regular]
+#       text-size: 14
+#     paint:
+#       text-color: '#34373d'
+#       text-halo-color: '#ffffff'
+#       text-halo-width: 2
+# Custom layers draw above generated layers, in list order (last on top).
+# A custom id matching a generated id replaces that generated layer.
+# Slide/start layers override these defaults only for that slide/start screen.
 
 map:
   # theme: light # EXAMPLE; default follows the interface's light/dark mode.
   # Interface mode follows saved preference, then the system preference.
-  styles: {} # Default: generated Protomaps style for each mode.
+  styles: {} # Default: Protomaps when a key is supplied; otherwise no basemap.
   # Each light/dark entry accepts a URL, local style path or MapLibre style object.
   # EXAMPLES (replace styles):
   # styles:
   #   light: assets/map-styles/light.json
   #   dark: https://example.org/dark-style.json
-  # Missing modes fall back to an inherited style, then generated Protomaps.
+  # Without a resolved custom style, a supplied key enables generated Protomaps.
+  # With no custom style or key, no basemap resources are loaded.
   labels:
     visible: false
     position: belowWarpedMaps # Or aboveWarpedMaps; back/front are aliases.
@@ -115,6 +138,7 @@ map:
 protomaps:
   # key: "" # Unset: use PUBLIC_PROTOMAPS_KEY, then empty string. A configured
   # key overrides the environment; leave it omitted to use an environment key.
+  # With no key, the generated Protomaps basemap is disabled.
   locale: en
   # lang: en # Alias for locale; locale wins when both are supplied.
   glyphs: https://protomaps.github.io/basemaps-assets/fonts/{fontstack}/{range}.pbf
@@ -135,11 +159,8 @@ protomaps:
 
 interface:
   text: {} # All available keys and English defaults are in interface.yml.
-  # Legacy start-screen keys. Prefer interface.text in new projects and avoid
-  # setting the same label in both places: the Start screen still reads
-  # startButton/madeWith directly from startScreen when present.
+  # Legacy start-screen keys. Prefer interface.text in new projects;
+  # interface.text takes precedence when both are supplied.
   startScreen:
     startButton: Start
-    chapterCountSingular: "{count} chapter in this slideshow"
-    chapterCountPlural: "{count} chapters in this slideshow"
     madeWith: Made with

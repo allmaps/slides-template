@@ -20,9 +20,22 @@ location: {}
 #   zoom: 15
 #   bearing: 0 # Clockwise degrees.
 #   duration: 4000 # Default flight duration in milliseconds; the initial view
-#   # and image slides are immediate. The app currently treats 0 as the default.
+#   # is immediate. The app currently treats 0 as the default.
 
-hideBasemap: false # Also hidden automatically for any type: Image entry.
+fit: contain # contain | cover | equal; used when automatically fitting map bounds.
+# contain shows all bounds; cover fills the available map area with cropping;
+# equal gives the bounds the same area as the available viewport.
+# Applies to the live view and generated previews. useZoom overrides fitted zoom;
+# an explicit location.zoom takes priority over both.
+
+# padding: 25 # Optional uniform inner margin in pixels; negative values are allowed.
+# Omitted: 25 in the live view, 20 in slide previews, 32 in sharing images.
+# Added inside the space left by the interface; cannot change layout reservations.
+# Use fit: cover with padding: 0 to fill that area without an extra margin.
+# Negative values (e.g. -20) zoom in for extra cropping; the layout center stays fixed.
+# The temporary "Show full map" view always uses the normal 25-pixel margin.
+
+hideBasemap: false # Set true to hide the basemap for this slide.
 map: {} # Inherits project/slideshow map settings.
 # Accepts every field in slides.config.yml's map block: theme, styles,
 # labels.visible/position, hiddenLayers, foreground.light/dark and protomaps.
@@ -33,11 +46,9 @@ warpedMaps: [] # No maps. A single object is also accepted instead of an array.
 #   - url: https://annotations.allmaps.org/maps/e9aa6ec10276bf65@d2d0044d129ea2d5
 #     # url OR path is required; url wins if both are supplied.
 #     # path: assets/annotations/map.json # Local alternative, content-root relative.
-#     # type: Image # Default: annotation. Image treats url as an IIIF Image API
-#     # service base URL without /info.json, rather than a georeference annotation.
 #     # caption: My map # Default: label derived from homepage/url, then Map layer N.
 #     # provenance: Collection name # Default: host from homepage/url, then
-#     # "Image layer" or "Georeference annotation".
+#     # "Georeference annotation".
 #     # homepage: https://example.org/object # Default: unset; original source link.
 #     useBearing: false # Take orientation from this map's first annotation.
 #     useBounds: false # If any maps opt in, only those determine automatic bounds;
@@ -45,18 +56,17 @@ warpedMaps: [] # No maps. A single object is also accepted instead of an array.
 #     useZoom: false # Derive zoom from resource scale; explicit zoom takes priority.
 #     options: {} # App + renderer defaults: see warped-map-options.yml.
 #     darkOptions: {} # Merged over options only in dark interface mode.
-#     # region: [0, 0, 12055, 7632] # EXAMPLE: Image-only crop in original pixels
-#     # [x, y, width, height]; omitted means the whole image.
-#     wiggle: false # Image-only slight rotation of 2.5 degrees.
 # Each slide supplies its own map list; maps do not carry over automatically.
+# For zoomable images without georeferencing, use IIIF figures in the slide text.
 
-layers: [] # No changes to the slideshow's shared GeoJSON layers.
+layers: [] # Use the global layer defaults from slides.config.yml.
 # EXAMPLE: {source-id}-fill | -line | -point-circle | -point-symbol.
 #   - layer: route-line # Required existing layer id, without the user- prefix.
-#     opacity: 1 # EXAMPLE, 0..1; omitted leaves the current opacity unchanged.
-#     visibility: visible # EXAMPLE: visible | none; omitted preserves visibility.
-#     duration: 300 # EXAMPLE, milliseconds; omitted uses the current MapLibre
-#     # paint transition. These changes persist until a later slide changes them.
+#     opacity: 1 # EXAMPLE, 0..1; omitted uses the global layer's paint opacity.
+#     visibility: visible # EXAMPLE: visible | none; omitted uses the global default.
+#     duration: 300 # EXAMPLE, non-negative milliseconds; omitted uses the global
+#     # transition or MapLibre default. Overrides apply only to this slide.
+# Custom layers use their id, e.g. layer: historic-building-labels.
 
 subslideshows: [] # No linked slideshows; a single id/object is also accepted.
 # EXAMPLES (must match an id in slides.config.yml):
@@ -69,11 +79,3 @@ subslideshows: [] # No linked slideshows; a single id/object is also accepted.
 #   image: https://example.org/sprites.jpg
 #   dimensions: [4096, 4096] # EXAMPLE [width, height] in pixels.
 # Sprite chapters cannot generate thumbnails in the current renderer.
-
-# Legacy fields still accepted by the schema, currently unused by the app.
-# Kept here for completeness; leave them omitted in new slides.
-# caption: "" # No visible chapter caption; write captions in Markdown or maps.
-# freeze: false # Does not currently freeze the camera.
-# padding: 25 # App uses layout-dependent padding, with 25px base padding.
-# fit: contain # cover | contain | equal; current camera fits map bounds.
-# contain: false # No current effect.

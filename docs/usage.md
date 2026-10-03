@@ -21,21 +21,24 @@ For software development in a Slides checkout, run
 
 The filename `01-original-map.md` becomes the `original-map` anchor.
 Each slide declares its own maps; repeat a map to retain it on the next slide.
-The seven example slides use the same versioned Van Berckenrode annotation.
+The example slides use the same versioned Van Berckenrode annotation.
 Their frontmatter changes the mask, control points, transformation and opacity;
-the final three slides share a close-up of central Amsterdam.
+the later slides explore central Amsterdam.
 
 The first three slides keep the full image visible with `applyMask: false`,
 preserve its orientation with `useBearing: true` and use a `helmert`
 transformation. Later slides apply the mask and compare `polynomial` with
-`thinPlateSpline` over a Protomaps basemap. The first three slides hide the
-basemap to focus on the original image. Diagnostic dots, mask outlines and
-vectors appear in the interactive map; static previews do not draw these overlays.
+`thinPlateSpline` over a Protomaps basemap.
 
-An original image uses `type: Image` and an Image API service URL without
-`/info.json`. A georeferenced map uses an annotation URL and omits `type`.
-Omit `location` to fit maps automatically, or supply `center: [longitude, latitude]`
-and `zoom` for a specific view.
+The last two slides demonstrate GeoJSON overlays. `sources` in `slides.config.yml`
+declares the datasets; `layers` sets their default visibility and defines a
+custom symbol layer whose `text-field: [get, Naam]` reads building names.
+Each slide enables the layers it needs with `layers: [{layer: ..., visibility: visible}]`.
+Omitted settings return to the global defaults, including when navigating backward.
+Use the IDs in the configuration without adding a `user-` prefix.
+See [layer configuration](https://github.com/allmaps/slides/blob/main/docs/configuration.md#shared-geojson-overlays)
+for local files, styling and additional layer types. These examples require the
+Slides version that introduces global layers; in this checkout, use the local CLI.
 
 For local images, create `assets/images/` and use ordinary Markdown:
 
@@ -76,9 +79,9 @@ MapLibre style URLs or files under `assets/map-styles/`.
 From this content repository:
 
 ```sh
-pnpm exec slides validate .
-pnpm exec slides build .
-pnpm exec slides preview .
+pnpm exec slides validate
+pnpm exec slides build
+pnpm exec slides preview
 ```
 
 Builds generate map previews and local IIIF images, then export
@@ -96,4 +99,4 @@ libraries, and builds with Xvfb. Configure any custom domain in Pages settings.
 Manual runs offer separate reset switches for IIIF, annotations and thumbnails.
 
 To refresh map previews while developing, run `pnpm exec slides thumbnails`
-with the content directory. Development requests do not generate previews.
+with the content directory.

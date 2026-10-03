@@ -1,7 +1,6 @@
 # English interface defaults for Allmaps Slides (2026-10-01).
 # Copy the desired keys under interface.text in slides.config.yml.
 # This reference is not loaded automatically. Keep all {placeholders}.
-# Some labels are retained for compatibility or alternate app views.
 
 interface:
   text:
@@ -46,8 +45,6 @@ interface:
     hide: Hide
     sections: Sections
     chapterNumber: Chapter {number}
-    chapterCountSingular: "{count} chapter in this slideshow"
-    chapterCountPlural: "{count} chapters in this slideshow"
     madeWith: Made with
     productName: Allmaps Slides
     softwareSource: Source code
@@ -76,7 +73,6 @@ interface:
     backToTitle: Back to {title}
     scrollToTop: Back to top
     credits: Credits
-    noCredits: No credits have been provided for this slideshow.
     expandAll: Expand all
     collapseAll: Collapse all
     slides: Slides
@@ -89,7 +85,6 @@ interface:
     mapCountSingular: "{count} map"
     mapCountPlural: "{count} maps"
     mapLayer: Map layer {count}
-    imageLayer: Image layer
     georeferenceAnnotation: Georeference annotation
     noLayers: No map layers for this slide
     visibleLayerSingular: "{count} map layer visible"

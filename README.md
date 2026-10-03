@@ -1,10 +1,8 @@
 # Allmaps Slides template
 
 Create a map slideshow from one configuration file and Markdown slides.
-This English example explains georeferencing with the Van Berckenrode map of
+This example explains georeferencing using the Van Berckenrode map of
 Amsterdam: draw a mask, add control points and compare two transformations.
-Its seven slides use a remote map image and a Protomaps basemap, so you need
-internet access.
 
 Create a repository with GitHub's **Use this template** button, then clone it.
 Use Node.js 24 or later and pnpm 10. Before publishing your content,
@@ -31,7 +29,7 @@ See [setup, upgrades and deployment](docs/usage.md) for more commands.
 - Edit [slides.config.yml](slides.config.yml) for the title and project settings.
 - Replace the files in [slideshows/main](slideshows/main). Numeric prefixes set their order.
 - Put the title and map settings in each slide's YAML frontmatter; write its body in Markdown.
-- Replace image and annotation URLs with your own, and update [credits.md](credits.md).
+- Replace image and annotation URLs with your own, and update [CREDITS.md](CREDITS.md).
 
 See [writing slides](https://github.com/allmaps/slides/blob/main/docs/authoring.md)
 and [images and captions](https://github.com/allmaps/slides/blob/main/docs/images.md)
@@ -48,10 +46,10 @@ loaded by the app; YAML includes and cross-file anchors are not supported.
 | [slides.config.yml](reference/slides.config.yml) | Project, slideshow, basemap and generation options. |
 | [slide.yml](reference/slide.yml) | Slide frontmatter and map entries. |
 | [warped-map-options.yml](reference/warped-map-options.yml) | Rendering options and dark-mode overrides. |
-| [interface.yml](reference/interface.yml) | English interface labels and placeholders. |
+| [interface.yml](reference/interface.yml) | Interface labels and placeholders. |
 
-Values show defaults; comments distinguish examples, inherited values and
-settings not used by the current app. Protomaps style overrides are not enumerated.
+Values show defaults; comments explain examples, inheritance and support limits.
+Protomaps style overrides are not enumerated.
 Check these references when upgrading Slides.
 
 ## License

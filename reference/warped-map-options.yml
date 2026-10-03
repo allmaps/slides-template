@@ -17,8 +17,8 @@ removeColorThreshold: 0.3
 removeColorHardness: 0.7
 
 # transformationType: polynomial # EXAMPLE. Omitted uses the annotation's
-# transformation (polynomial if none). Image layers use a generated helmert
-# transformation. Other values include helmert, projective and thinPlateSpline.
+# transformation (polynomial if none). Other values include helmert,
+# projective and thinPlateSpline.
 # distortionMeasure: log2sigma # EXAMPLE. Omitted disables distortion coloring.
 distortionMeasures: [] # Additional measures to calculate on the triangle mesh.
 distortionColor00: "#fe5e60"

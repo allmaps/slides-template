@@ -1,19 +1,47 @@
 title: From Image to Map
 description: Georeferencing the Van Berckenrode map of Amsterdam
 credits: CREDITS.md
+sources:
+  public_transport:
+    # From https://maps.amsterdam.nl/open_geodata/?k=648
+    type: geojson
+    url: https://maps.amsterdam.nl/open_geodata/geojson_lnglat.php?KAARTLAAG=TRAMMETRO_LIJNEN_2026&THEMA=trammetro
+  historic_buildings:
+    # https://maps.amsterdam.nl/open_geodata/?k=118
+    type: geojson
+    url: https://maps.amsterdam.nl/open_geodata/geojson_lnglat.php?KAARTLAAG=HISTORISCHE_BEBOUWING&THEMA=archeologie
+
+# Global defaults: the final two slides enable their own overlays.
+layers:
+  - layer: public_transport-line
+    visibility: none
+  - layer: historic_buildings-point-circle
+    visibility: none
+  - id: historic-building-labels
+    type: symbol
+    source: historic_buildings
+    layout:
+      visibility: none
+      text-field: [get, Naam]
+      text-font: [Noto Sans Medium]
+      text-size: 14
+    paint:
+      text-color: '#34373d'
+      text-halo-color: '#ffffff'
+      text-halo-width: 2
 
 slideshows:
   - id: main
     path: slideshows/main
     start:
-      location:
-        zoom: 18
+      hideBasemap: true
       warpedMaps:
-          - url: https://annotations.allmaps.org/maps/e9aa6ec10276bf65@d2d0044d129ea2d5
+          - url: https://annotations.allmaps.org/maps/e9aa6ec10276bf65@c8c1e1934bc93e0f
             caption: Van Berckenrode map of Amsterdam
             provenance: Allard Pierson
             homepage: https://hdl.handle.net/11245/3.39844
             useBearing: true
+            useZoom: true
             options:
               applyMask: false
               transformationType: helmert
